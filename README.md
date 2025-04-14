@@ -14,6 +14,11 @@
 ![default](https://cloud.githubusercontent.com/assets/11352152/14549370/3cadb750-028d-11e6-818d-c6a1bc6349fc.PNG)
 ![dark](https://cloud.githubusercontent.com/assets/11352152/14549372/3cbc8514-028d-11e6-8daf-ec1ba01c9d7e.PNG)
 
+## Why fork?
+
+The original repository at https://github.com/flatpickr/flatpickr seems to have been non-maintained recently. We have even tried to pay for any support of the original repo https://github.com/flatpickr/flatpickr/issues/3070, but without luck.
+
+So this is a fork of **flatpickr** that will be used for any work that is needed for our product at https://github.com/Megabit/Blazorise.
 
 ## Motivation
 Almost every large SPA or project involves date and time input. Browser's native implementations of those are inconsistent and limited in functionality. Most other libraries require you to pull in heavy dependencies like jQuery, Bootstrap, and moment.js. I wanted something that was good-looking out of the box, dependency-free, powerful, and extensible.
