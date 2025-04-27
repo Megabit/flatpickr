@@ -503,9 +503,9 @@ function FlatpickrInstance(
       jumpDate !== undefined
         ? self.parseDate(jumpDate)
         : self.latestSelectedDateObj ||
-        (self.config.minDate && self.config.minDate > self.now
-          ? self.config.minDate
-          : self.config.maxDate && self.config.maxDate < self.now
+          (self.config.minDate && self.config.minDate > self.now
+            ? self.config.minDate
+            : self.config.maxDate && self.config.maxDate < self.now
             ? self.config.maxDate
             : self.now);
 
@@ -2611,10 +2611,10 @@ function FlatpickrInstance(
       self.selectedDates.length > 0
         ? self.selectedDates[0]
         : self.config.minDate &&
-         self.config.minDate.getTime() > self.now.getTime()
+          self.config.minDate.getTime() > self.now.getTime()
         ? self.config.minDate
         : self.config.maxDate &&
-         self.config.maxDate.getTime() < self.now.getTime()
+          self.config.maxDate.getTime() < self.now.getTime()
         ? self.config.maxDate
         : self.now;
 
