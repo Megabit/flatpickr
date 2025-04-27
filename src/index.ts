@@ -249,7 +249,7 @@ function FlatpickrInstance(
         self.minDateHasTime &&
         self.latestSelectedDateObj &&
         compareDates(self.latestSelectedDateObj, self.config.minDate, true) ===
-      0);
+          0);
 
     const limitMaxHours =
       self.config.maxTime !== undefined ||
@@ -257,7 +257,7 @@ function FlatpickrInstance(
         self.maxDateHasTime &&
         self.latestSelectedDateObj &&
         compareDates(self.latestSelectedDateObj, self.config.maxDate, true) ===
-      0);
+          0);
 
     if (
       self.config.maxTime !== undefined &&
@@ -503,9 +503,9 @@ function FlatpickrInstance(
       jumpDate !== undefined
         ? self.parseDate(jumpDate)
         : self.latestSelectedDateObj ||
-      (self.config.minDate && self.config.minDate > self.now
-        ? self.config.minDate
-        : self.config.maxDate && self.config.maxDate < self.now
+        (self.config.minDate && self.config.minDate > self.now
+          ? self.config.minDate
+          : self.config.maxDate && self.config.maxDate < self.now
             ? self.config.maxDate
             : self.now);
 
@@ -718,14 +718,14 @@ function FlatpickrInstance(
             dayElement,
             "startRange",
             self.selectedDates[0] &&
-          compareDates(date, self.selectedDates[0], true) === 0
+              compareDates(date, self.selectedDates[0], true) === 0
           );
 
           toggleClass(
             dayElement,
             "endRange",
             self.selectedDates[1] &&
-          compareDates(date, self.selectedDates[1], true) === 0
+              compareDates(date, self.selectedDates[1], true) === 0
           );
 
           if (className === "nextMonthDay") dayElement.classList.add("inRange");
@@ -1227,11 +1227,11 @@ function FlatpickrInstance(
         "span",
         "flatpickr-am-pm",
         self.l10n.amPM[
-      int(
-        (self.latestSelectedDateObj
-          ? self.hourElement.value
-          : self.config.defaultHour) > 11
-      )
+          int(
+            (self.latestSelectedDateObj
+              ? self.hourElement.value
+              : self.config.defaultHour) > 11
+          )
         ]
       );
       self.amPM.title = self.l10n.toggleTitle;
@@ -1826,8 +1826,8 @@ function FlatpickrInstance(
       return;
 
     const hoverDate = elem
-    ? elem.dateObj.getTime()
-    : (self.days.firstElementChild as DayElement).dateObj.getTime(),
+        ? elem.dateObj.getTime()
+        : (self.days.firstElementChild as DayElement).dateObj.getTime(),
       initialDate = (self.parseDate(
         self.selectedDates[0],
         undefined,
@@ -2611,10 +2611,10 @@ function FlatpickrInstance(
       self.selectedDates.length > 0
         ? self.selectedDates[0]
         : self.config.minDate &&
-        self.config.minDate.getTime() > self.now.getTime()
+         self.config.minDate.getTime() > self.now.getTime()
         ? self.config.minDate
         : self.config.maxDate &&
-        self.config.maxDate.getTime() < self.now.getTime()
+         self.config.maxDate.getTime() < self.now.getTime()
         ? self.config.maxDate
         : self.now;
 
