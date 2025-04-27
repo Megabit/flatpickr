@@ -59,7 +59,7 @@ export type Locale = {
   hourAriaLabel: string;
   minuteAriaLabel: string;
   time_24hr: boolean;
-  today:string;
+  today: string;
 };
 
 export type CustomLocale = {

@@ -342,7 +342,7 @@ export interface ParsedOptions {
   time_24hr: boolean;
   weekNumbers: boolean;
   wrap: boolean;
-  showTodayButton:boolean;
+  showTodayButton: boolean;
 }
 
 export const defaults: ParsedOptions = {
