@@ -2461,15 +2461,23 @@ function FlatpickrInstance(
   }
 
   function buildExtraButtons() {
-    let extraButtonsContainer = self.calendarContainer.querySelector(".flatpickr-extra-buttons-container") as HTMLDivElement;
+    let extraButtonsContainer = self.calendarContainer.querySelector(
+      ".flatpickr-extra-buttons-container"
+    ) as HTMLDivElement;
 
     if (!extraButtonsContainer) {
-      extraButtonsContainer = createElement<HTMLDivElement>("div", "flatpickr-extra-buttons-container");
+      extraButtonsContainer = createElement<HTMLDivElement>(
+        "div",
+        "flatpickr-extra-buttons-container"
+      );
 
       extraButtonsContainer.style.display = "flex";
       extraButtonsContainer.style.justifyContent = "end";
       extraButtonsContainer.style.padding = "10px";
-      const todayButton = createElement<HTMLButtonElement>("button", "flatpickr-today-button");
+      const todayButton = createElement<HTMLButtonElement>(
+        "button",
+        "flatpickr-today-button"
+      );
 
       todayButton.addEventListener("click", () => {
         self.setDate(new Date(), true);
@@ -2479,11 +2487,15 @@ function FlatpickrInstance(
       self.calendarContainer.appendChild(extraButtonsContainer);
     }
 
-    let todayButton = self.calendarContainer.querySelector(".flatpickr-today-button") as HTMLDivElement;
-    
+    let todayButton = self.calendarContainer.querySelector(
+      ".flatpickr-today-button"
+    ) as HTMLDivElement;
+
     todayButton.textContent = self.l10n.today;
     todayButton.style.display = self.config.showTodayButton ? "block" : "none";
-    extraButtonsContainer.style.display = self.config.showTodayButton ? "flex" : "none";
+    extraButtonsContainer.style.display = self.config.showTodayButton
+      ? "flex"
+      : "none";
   }
 
   function setSelectedDate(
