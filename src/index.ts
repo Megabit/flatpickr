@@ -2468,9 +2468,6 @@ function FlatpickrInstance(
         "flatpickr-extra-buttons-container"
       );
 
-      extraButtonsContainer.style.display = "flex";
-      extraButtonsContainer.style.justifyContent = "end";
-      extraButtonsContainer.style.padding = "10px";
       const todayButton = createElement<HTMLButtonElement>(
         "button",
         "flatpickr-today-button"
