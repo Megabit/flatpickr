@@ -940,6 +940,49 @@ function FlatpickrInstance(
     }
   }
 
+  function buildExtraButtons() {
+    if (self.extraButtonsContainer) {
+      clearNode(self.extraButtonsContainer);
+    }
+
+    self.extraButtonsContainer = self.calendarContainer.querySelector(
+      ".flatpickr-extra-buttons-container"
+    ) as HTMLDivElement;
+
+    if (!self.extraButtonsContainer) {
+      self.extraButtonsContainer = createElement<HTMLDivElement>(
+        "div",
+        "flatpickr-extra-buttons-container"
+      );
+
+      self.todayButtonElement = createElement<HTMLButtonElement>(
+        "button",
+        "flatpickr-today-button"
+      );
+
+      self.todayButtonElement.addEventListener("click", () => {
+        self.setDate(new Date(), true);
+      });
+
+      self.extraButtonsContainer.appendChild(self.todayButtonElement);
+      self.calendarContainer.appendChild(self.extraButtonsContainer);
+    }
+
+    if (self.todayButtonElement) {
+      self.todayButtonElement.textContent = self.l10n.today;
+      self.todayButtonElement.style.display = self.config.todayButton
+        ? "block"
+        : "none";
+      self.todayButtonElement.disabled = self.input.disabled;
+    }
+
+    if (self.extraButtonsContainer) {
+      self.extraButtonsContainer.style.display = self.config.todayButton
+        ? "flex"
+        : "none";
+    }
+  }
+
   function buildMonthSwitch() {
     if (
       self.config.showMonths > 1 ||
@@ -2455,42 +2498,6 @@ function FlatpickrInstance(
 
     self.redraw();
     updateValue(true);
-  }
-
-  function buildExtraButtons() {
-    let extraButtonsContainer = self.calendarContainer.querySelector(
-      ".flatpickr-extra-buttons-container"
-    ) as HTMLDivElement;
-
-    if (!extraButtonsContainer) {
-      extraButtonsContainer = createElement<HTMLDivElement>(
-        "div",
-        "flatpickr-extra-buttons-container"
-      );
-
-      const todayButton = createElement<HTMLButtonElement>(
-        "button",
-        "flatpickr-today-button"
-      );
-
-      todayButton.addEventListener("click", () => {
-        self.setDate(new Date(), true);
-      });
-
-      extraButtonsContainer.appendChild(todayButton);
-      self.calendarContainer.appendChild(extraButtonsContainer);
-    }
-
-    let todayButton = self.calendarContainer.querySelector(
-      ".flatpickr-today-button"
-    ) as HTMLButtonElement;
-
-    todayButton.textContent = self.l10n.today;
-    todayButton.style.display = self.config.todayButton ? "block" : "none";
-    todayButton.disabled = self.input.disabled;
-    extraButtonsContainer.style.display = self.config.todayButton
-      ? "flex"
-      : "none";
   }
 
   function setSelectedDate(

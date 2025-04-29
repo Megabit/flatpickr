@@ -49,6 +49,9 @@ export interface Elements {
   secondElement?: HTMLInputElement;
   amPM?: HTMLSpanElement;
 
+  extraButtonsContainer?: HTMLDivElement;
+  todayButtonElement?: HTMLButtonElement;
+
   pluginElements: Node[];
 }
 
