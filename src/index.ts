@@ -2447,9 +2447,6 @@ function FlatpickrInstance(
       }
     } else {
       self.config[option] = value;
-      if (option === "showTodayButton") {
-        buildExtraButtons();
-      }
       if (CALLBACKS[option] !== undefined)
         (CALLBACKS[option] as Function[]).forEach((x) => x());
       else if (HOOKS.indexOf(option as HookKey) > -1)
@@ -2492,8 +2489,8 @@ function FlatpickrInstance(
     ) as HTMLDivElement;
 
     todayButton.textContent = self.l10n.today;
-    todayButton.style.display = self.config.showTodayButton ? "block" : "none";
-    extraButtonsContainer.style.display = self.config.showTodayButton
+    todayButton.style.display = self.config.todayButton ? "block" : "none";
+    extraButtonsContainer.style.display = self.config.todayButton
       ? "flex"
       : "none";
   }
