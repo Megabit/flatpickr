@@ -2483,10 +2483,11 @@ function FlatpickrInstance(
 
     let todayButton = self.calendarContainer.querySelector(
       ".flatpickr-today-button"
-    ) as HTMLDivElement;
+    ) as HTMLButtonElement;
 
     todayButton.textContent = self.l10n.today;
     todayButton.style.display = self.config.todayButton ? "block" : "none";
+    todayButton.disabled = self.input.disabled;
     extraButtonsContainer.style.display = self.config.todayButton
       ? "flex"
       : "none";
