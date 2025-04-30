@@ -946,7 +946,7 @@ function FlatpickrInstance(
     }
 
     // early exit
-    if (!self.config.todayButton && !self.config.clearButton) {
+    if (!self.config.clearButton && !self.config.todayButton) {
       return;
     }
 
@@ -961,29 +961,6 @@ function FlatpickrInstance(
       );
 
       self.calendarContainer.appendChild(self.footerButtons);
-    }
-
-    if (self.todayButton) {
-      clearNode(self.todayButton);
-    }
-
-    if (self.config.todayButton) {
-      self.todayButton = createElement<HTMLButtonElement>(
-        "button",
-        "flatpickr-button flatpickr-today-button"
-      );
-
-      self.todayButton.addEventListener("click", () => {
-        self.setDate(new Date(), true);
-        self.close();
-      });
-
-      self.todayButton.textContent = self.l10n.today;
-      self.todayButton.disabled = self.input.disabled;
-
-      self.todayButton.setAttribute("aria-label", self.l10n.today);
-
-      self.footerButtons.appendChild(self.todayButton);
     }
 
     if (self.clearButton) {
@@ -1007,6 +984,29 @@ function FlatpickrInstance(
       self.clearButton.setAttribute("aria-label", self.l10n.clear);
 
       self.footerButtons.appendChild(self.clearButton);
+    }
+
+    if (self.todayButton) {
+      clearNode(self.todayButton);
+    }
+
+    if (self.config.todayButton) {
+      self.todayButton = createElement<HTMLButtonElement>(
+        "button",
+        "flatpickr-button flatpickr-today-button"
+      );
+
+      self.todayButton.addEventListener("click", () => {
+        self.setDate(new Date(), true);
+        self.close();
+      });
+
+      self.todayButton.textContent = self.l10n.today;
+      self.todayButton.disabled = self.input.disabled;
+
+      self.todayButton.setAttribute("aria-label", self.l10n.today);
+
+      self.footerButtons.appendChild(self.todayButton);
     }
   }
 
