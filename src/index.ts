@@ -970,7 +970,7 @@ function FlatpickrInstance(
     if (self.config.todayButton) {
       self.todayButton = createElement<HTMLButtonElement>(
         "button",
-        "flatpickr-button"
+        "flatpickr-button flatpickr-today-button"
       );
 
       self.todayButton.addEventListener("click", () => {
@@ -979,6 +979,8 @@ function FlatpickrInstance(
 
       self.todayButton.textContent = self.l10n.today;
       self.todayButton.disabled = self.input.disabled;
+
+      self.todayButton.setAttribute("aria-label", self.l10n.today);
 
       self.footerButtons.appendChild(self.todayButton);
     }
@@ -990,7 +992,7 @@ function FlatpickrInstance(
     if (self.config.clearButton) {
       self.clearButton = createElement<HTMLButtonElement>(
         "button",
-        "flatpickr-button"
+        "flatpickr-button flatpickr-clear-button"
       );
 
       self.clearButton.addEventListener("click", () => {
@@ -999,6 +1001,8 @@ function FlatpickrInstance(
 
       self.clearButton.textContent = self.l10n.clear;
       self.clearButton.disabled = self.input.disabled;
+
+      self.clearButton.setAttribute("aria-label", self.l10n.clear);
 
       self.footerButtons.appendChild(self.clearButton);
     }
