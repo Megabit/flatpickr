@@ -58,6 +58,8 @@ export const Serbian: CustomLocale = {
   weekAbbreviation: "Ned.",
   rangeSeparator: " do ",
   time_24hr: true,
+  today: "Danas",
+  clear: "Očisti",
 };
 
 fp.l10ns.sr = Serbian;

@@ -63,6 +63,8 @@ export const Belarusian: CustomLocale = {
   amPM: ["ДП", "ПП"],
   yearAriaLabel: "Год",
   time_24hr: true,
+  today: "Сёння",
+  clear: "Ачысціць",
 };
 
 fp.l10ns.be = Belarusian;

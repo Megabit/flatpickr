@@ -57,6 +57,8 @@ export const Persian: CustomLocale = {
   ordinal: () => {
     return "";
   },
+  today: "امروز",
+  clear: "پاک کردن",
 };
 
 fp.l10ns.fa = Persian;

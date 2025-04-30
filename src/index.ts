@@ -638,6 +638,8 @@ function FlatpickrInstance(
 
     self.calendarContainer.appendChild(fragment);
 
+    buildExtraButtons();
+
     const customAppend =
       self.config.appendTo !== undefined &&
       self.config.appendTo.nodeType !== undefined;
@@ -935,6 +937,76 @@ function FlatpickrInstance(
     self.days = self.daysContainer.firstChild as HTMLDivElement;
     if (self.config.mode === "range" && self.selectedDates.length === 1) {
       onMouseOver();
+    }
+  }
+
+  function buildExtraButtons() {
+    if (self.footerButtons) {
+      clearNode(self.footerButtons);
+    }
+
+    // early exit
+    if (!self.config.clearButton && !self.config.todayButton) {
+      return;
+    }
+
+    self.footerButtons = self.calendarContainer.querySelector(
+      ".flatpickr-footer-buttons"
+    ) as HTMLDivElement;
+
+    if (!self.footerButtons) {
+      self.footerButtons = createElement<HTMLDivElement>(
+        "div",
+        "flatpickr-footer-buttons"
+      );
+
+      self.calendarContainer.appendChild(self.footerButtons);
+    }
+
+    if (self.clearButton) {
+      clearNode(self.clearButton);
+    }
+
+    if (self.config.clearButton) {
+      self.clearButton = createElement<HTMLButtonElement>(
+        "button",
+        "flatpickr-button flatpickr-clear-button"
+      );
+
+      self.clearButton.addEventListener("click", () => {
+        self.clear();
+        self.close();
+      });
+
+      self.clearButton.textContent = self.l10n.clear;
+      self.clearButton.disabled = self.input.disabled;
+
+      self.clearButton.setAttribute("aria-label", self.l10n.clear);
+
+      self.footerButtons.appendChild(self.clearButton);
+    }
+
+    if (self.todayButton) {
+      clearNode(self.todayButton);
+    }
+
+    if (self.config.todayButton) {
+      self.todayButton = createElement<HTMLButtonElement>(
+        "button",
+        "flatpickr-button flatpickr-today-button"
+      );
+
+      self.todayButton.addEventListener("click", () => {
+        self.setDate(new Date(), true);
+        self.close();
+      });
+
+      self.todayButton.textContent = self.l10n.today;
+      self.todayButton.disabled = self.input.disabled;
+
+      self.todayButton.setAttribute("aria-label", self.l10n.today);
+
+      self.footerButtons.appendChild(self.todayButton);
     }
   }
 
@@ -2006,6 +2078,8 @@ function FlatpickrInstance(
       "static",
       "enableSeconds",
       "disableMobile",
+      "todayButton",
+      "clearButton",
     ];
 
     const userConfig = {
@@ -2300,6 +2374,7 @@ function FlatpickrInstance(
     buildMonthSwitch();
     updateNavigationCurrentMonth();
     buildDays();
+    buildExtraButtons();
   }
 
   function focusAndClose() {
@@ -2444,7 +2519,6 @@ function FlatpickrInstance(
       }
     } else {
       self.config[option] = value;
-
       if (CALLBACKS[option] !== undefined)
         (CALLBACKS[option] as Function[]).forEach((x) => x());
       else if (HOOKS.indexOf(option as HookKey) > -1)

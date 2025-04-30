@@ -54,6 +54,8 @@ export const Bulgarian: CustomLocale = {
     ],
   },
   time_24hr: true,
+  today: "Днес",
+  clear: "Изчисти",
   firstDayOfWeek: 1,
 };
 

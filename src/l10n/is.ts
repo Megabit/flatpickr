@@ -63,6 +63,8 @@ export const Icelandic: CustomLocale = {
   weekAbbreviation: "vika",
   yearAriaLabel: "Ár",
   time_24hr: true,
+  today: "Í dag",
+  clear: "Hreinsa",
 };
 
 fp.l10ns.is = Icelandic;

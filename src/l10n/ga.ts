@@ -56,6 +56,8 @@ export const Irish: CustomLocale = {
     ],
   },
   time_24hr: true,
+  today: "Inniu",
+  clear: "Glan",
 };
 
 fp.l10ns.hr = Irish;

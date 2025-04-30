@@ -47,6 +47,8 @@ export const Hebrew: CustomLocale = {
   },
   rangeSeparator: " אל ",
   time_24hr: true,
+  today: "היום",
+  clear: "נקה",
 };
 
 fp.l10ns.he = Hebrew;

@@ -60,6 +60,8 @@ export const Italian: CustomLocale = {
   scrollTitle: "Scrolla per aumentare",
   toggleTitle: "Clicca per cambiare",
   time_24hr: true,
+  today: "Oggi",
+  clear: "Cancella",
 };
 
 fp.l10ns.it = Italian;

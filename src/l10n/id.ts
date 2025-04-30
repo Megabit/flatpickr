@@ -52,6 +52,8 @@ export const Indonesian: CustomLocale = {
     return "";
   },
   time_24hr: true,
+  today: "Hari ini",
+  clear: "Bersihkan",
   rangeSeparator: " - ",
 };
 

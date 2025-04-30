@@ -57,6 +57,9 @@ export const Slovak: CustomLocale = {
   firstDayOfWeek: 1,
   rangeSeparator: " do ",
   time_24hr: true,
+  today: "Dnes",
+  clear: "Vymazať",
+
   ordinal: function () {
     return ".";
   },

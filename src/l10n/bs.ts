@@ -56,6 +56,8 @@ export const Bosnian: CustomLocale = {
     ],
   },
   time_24hr: true,
+  today: "Danas",
+  clear: "Očisti",
 };
 
 fp.l10ns.bs = Bosnian;

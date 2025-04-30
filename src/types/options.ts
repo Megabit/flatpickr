@@ -266,6 +266,12 @@ Use it along with "enableTime" to create a time picker. */
 
   /* See https://chmln.github.io/flatpickr/examples/#flatpickr-external-elements */
   wrap: boolean;
+
+  /* Display today button in the footer section of the calendar. */
+  todayButton: boolean;
+
+  /* Display clear button in the footer section of the calendar. */
+  clearButton: boolean;
 }
 
 export type Options = Partial<BaseOptions>;
@@ -339,6 +345,8 @@ export interface ParsedOptions {
   time_24hr: boolean;
   weekNumbers: boolean;
   wrap: boolean;
+  todayButton: boolean;
+  clearButton: boolean;
 }
 
 export const defaults: ParsedOptions = {
@@ -421,4 +429,6 @@ export const defaults: ParsedOptions = {
   time_24hr: false,
   weekNumbers: false,
   wrap: false,
+  todayButton: false,
+  clearButton: false,
 };

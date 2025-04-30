@@ -58,6 +58,8 @@ export const Swedish: CustomLocale = {
   },
   rangeSeparator: " till ",
   time_24hr: true,
+  today: "Idag",
+  clear: "Rensa",
 
   ordinal: () => {
     return ".";

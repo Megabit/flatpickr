@@ -65,6 +65,8 @@ export const Esperanto: CustomLocale = {
     return "-a";
   },
   time_24hr: true,
+  today: "Hodiaŭ",
+  clear: "Vakigi",
 };
 
 fp.l10ns.eo = Esperanto;

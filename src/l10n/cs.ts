@@ -63,6 +63,8 @@ export const Czech: CustomLocale = {
   amPM: ["dop.", "odp."],
   yearAriaLabel: "Rok",
   time_24hr: true,
+  today: "Dnes",
+  clear: "Vymazat",
 };
 
 fp.l10ns.cs = Czech;

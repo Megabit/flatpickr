@@ -53,6 +53,8 @@ export const Hindi: CustomLocale = {
       "दिसम्बर",
     ],
   },
+  today: "आज",
+  clear: "साफ़ करें",
 };
 
 fp.l10ns.hi = Hindi;
