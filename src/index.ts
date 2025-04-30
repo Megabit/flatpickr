@@ -945,7 +945,8 @@ function FlatpickrInstance(
       clearNode(self.footerButtons);
     }
 
-    if (!self.config.todayButton) {
+    // early exit
+    if (!self.config.todayButton && !self.config.clearButton) {
       return;
     }
 
@@ -969,7 +970,7 @@ function FlatpickrInstance(
     if (self.config.todayButton) {
       self.todayButton = createElement<HTMLButtonElement>(
         "button",
-        "flatpickr-today-button"
+        "flatpickr-button"
       );
 
       self.todayButton.addEventListener("click", () => {
@@ -980,6 +981,26 @@ function FlatpickrInstance(
       self.todayButton.disabled = self.input.disabled;
 
       self.footerButtons.appendChild(self.todayButton);
+    }
+
+    if (self.clearButton) {
+      clearNode(self.clearButton);
+    }
+
+    if (self.config.clearButton) {
+      self.clearButton = createElement<HTMLButtonElement>(
+        "button",
+        "flatpickr-button"
+      );
+
+      self.clearButton.addEventListener("click", () => {
+        self.clear();
+      });
+
+      self.clearButton.textContent = self.l10n.clear;
+      self.clearButton.disabled = self.input.disabled;
+
+      self.footerButtons.appendChild(self.clearButton);
     }
   }
 
@@ -2052,6 +2073,7 @@ function FlatpickrInstance(
       "enableSeconds",
       "disableMobile",
       "todayButton",
+      "clearButton",
     ];
 
     const userConfig = {

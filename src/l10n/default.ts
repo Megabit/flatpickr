@@ -70,6 +70,7 @@ export const english: Locale = {
   minuteAriaLabel: "Minute",
   time_24hr: false,
   today: "Today",
+  clear: "Clear",
 };
 
 export default english;

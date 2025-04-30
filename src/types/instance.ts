@@ -51,6 +51,7 @@ export interface Elements {
 
   footerButtons?: HTMLDivElement;
   todayButton?: HTMLButtonElement;
+  clearButton?: HTMLButtonElement;
 
   pluginElements: Node[];
 }
