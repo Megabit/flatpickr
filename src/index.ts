@@ -975,6 +975,7 @@ function FlatpickrInstance(
 
       self.todayButton.addEventListener("click", () => {
         self.setDate(new Date(), true);
+        self.close();
       });
 
       self.todayButton.textContent = self.l10n.today;
@@ -997,6 +998,7 @@ function FlatpickrInstance(
 
       self.clearButton.addEventListener("click", () => {
         self.clear();
+        self.close();
       });
 
       self.clearButton.textContent = self.l10n.clear;
