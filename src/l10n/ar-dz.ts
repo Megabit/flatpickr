@@ -50,6 +50,8 @@ export const AlgerianArabic: CustomLocale = {
   hourAriaLabel: "ساعة",
   minuteAriaLabel: "دقيقة",
   time_24hr: true,
+  today: "اليوم",
+  clear: "مسح",
 };
 
 fp.l10ns.ar = AlgerianArabic;

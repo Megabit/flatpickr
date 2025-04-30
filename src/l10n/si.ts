@@ -54,6 +54,8 @@ export const Sinhala: CustomLocale = {
     ],
   },
   time_24hr: true,
+  today: "අද",
+  clear: "මකන්න",
 };
 
 fp.l10ns.si = Sinhala;

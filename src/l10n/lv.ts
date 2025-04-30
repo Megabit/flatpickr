@@ -58,6 +58,8 @@ export const Latvian: CustomLocale = {
 
   rangeSeparator: " līdz ",
   time_24hr: true,
+  today: "Šodien",
+  clear: "Notīrīt",
 };
 
 fp.l10ns.lv = Latvian;

@@ -65,6 +65,8 @@ export const Kurdish: CustomLocale = {
   ordinal: () => {
     return "";
   },
+  today: "ئه‌مرۆ",
+  clear: "پاککردنەوە",
 };
 
 fp.l10ns.ckb = Kurdish;

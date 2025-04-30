@@ -53,6 +53,8 @@ export const Bangla: CustomLocale = {
       "ডিসেম্বর",
     ],
   },
+  today: "আজ",
+  clear: "পরিষ্কার",
 };
 
 fp.l10ns.bn = Bangla;

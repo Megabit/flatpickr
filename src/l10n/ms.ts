@@ -51,6 +51,8 @@ export const Malaysian: CustomLocale = {
   ordinal: () => {
     return "";
   },
+  today: "Hari ini",
+  clear: "Kosongkan",
 };
 
 fp.l10ns.ms = Malaysian;

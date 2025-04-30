@@ -56,6 +56,8 @@ export const Vietnamese: CustomLocale = {
 
   firstDayOfWeek: 1,
   rangeSeparator: " đến ",
+  today: "Hôm nay",
+  clear: "Xóa",
 };
 
 fp.l10ns.vn = Vietnamese;

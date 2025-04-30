@@ -60,6 +60,8 @@ export const Korean: CustomLocale = {
 
   rangeSeparator: " ~ ",
   amPM: ["오전", "오후"],
+  today: "오늘",
+  clear: "지우기",
 };
 
 fp.l10ns.ko = Korean;

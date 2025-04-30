@@ -65,6 +65,8 @@ export const Estonian: CustomLocale = {
   scrollTitle: "Keri, et suurendada",
   toggleTitle: "Klõpsa, et vahetada",
   time_24hr: true,
+  today: "Täna",
+  clear: "Tühjenda",
 };
 
 fp.l10ns.et = Estonian;

@@ -90,6 +90,8 @@ export const Welsh: CustomLocale = {
     return "";
   },
   time_24hr: true,
+  today: "Heddiw",
+  clear: "Clirio",
 };
 
 fp.l10ns.cy = Welsh;

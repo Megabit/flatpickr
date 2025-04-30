@@ -60,6 +60,8 @@ export const German: CustomLocale = {
   scrollTitle: "Zum Ändern scrollen",
   toggleTitle: "Zum Umschalten klicken",
   time_24hr: true,
+  today: "Heute",
+  clear: "Löschen",
 };
 
 fp.l10ns.de = German;

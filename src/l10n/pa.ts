@@ -54,6 +54,8 @@ export const Punjabi: CustomLocale = {
     ],
   },
   time_24hr: true,
+  today: "ਅੱਜ",
+  clear: "ਸਾਫ਼ ਕਰੋ",
 };
 
 fp.l10ns.pa = Punjabi;

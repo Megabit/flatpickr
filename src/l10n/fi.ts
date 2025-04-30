@@ -60,6 +60,8 @@ export const Finnish: CustomLocale = {
     return ".";
   },
   time_24hr: true,
+  today: "Tänään",
+  clear: "Tyhjennä",
 };
 
 fp.l10ns.fi = Finnish;

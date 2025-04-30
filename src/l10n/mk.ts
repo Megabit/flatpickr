@@ -58,6 +58,8 @@ export const Macedonian: CustomLocale = {
   weekAbbreviation: "Нед.",
   rangeSeparator: " до ",
   time_24hr: true,
+  today: "Денес",
+  clear: "Исчисти",
 };
 
 fp.l10ns.mk = Macedonian;

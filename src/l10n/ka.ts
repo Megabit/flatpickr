@@ -63,6 +63,8 @@ export const Georgian: CustomLocale = {
   amPM: ["AM", "PM"],
   yearAriaLabel: "წელი",
   time_24hr: true,
+  today: "დღეს",
+  clear: "გასუფთავება",
 };
 
 fp.l10ns.ka = Georgian;

@@ -74,6 +74,8 @@ export const Catalan: CustomLocale = {
   firstDayOfWeek: 1,
   rangeSeparator: " a ",
   time_24hr: true,
+  today: "Avui",
+  clear: "Neteja",
 };
 
 fp.l10ns.cat = fp.l10ns.ca = Catalan;

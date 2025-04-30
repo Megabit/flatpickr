@@ -63,6 +63,8 @@ export const Turkish: CustomLocale = {
   toggleTitle: "Aç/Kapa",
   amPM: ["ÖÖ", "ÖS"],
   time_24hr: true,
+  today: "Bugün",
+  clear: "Temizle",
 };
 
 fp.l10ns.tr = Turkish;

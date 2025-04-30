@@ -56,6 +56,8 @@ export const Romanian: CustomLocale = {
 
   firstDayOfWeek: 1,
   time_24hr: true,
+  today: "Astăzi",
+  clear: "Șterge",
 
   ordinal: () => {
     return "";

@@ -60,6 +60,8 @@ export const Burmese: CustomLocale = {
     return "";
   },
   time_24hr: true,
+  today: "ယနေ့",
+  clear: "ရှင်းလင်းရန်",
 };
 
 fp.l10ns.my = Burmese;

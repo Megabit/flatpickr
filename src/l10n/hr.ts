@@ -56,6 +56,8 @@ export const Croatian: CustomLocale = {
     ],
   },
   time_24hr: true,
+  today: "Danas",
+  clear: "Očisti",
 };
 
 fp.l10ns.hr = Croatian;

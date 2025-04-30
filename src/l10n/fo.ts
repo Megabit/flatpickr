@@ -65,6 +65,8 @@ export const Faroese: CustomLocale = {
   toggleTitle: "Trýst fyri at skifta",
   yearAriaLabel: "Ár",
   time_24hr: true,
+  today: "Í dag",
+  clear: "Tøm",
 };
 
 fp.l10ns.fo = Faroese;
