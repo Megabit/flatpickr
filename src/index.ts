@@ -941,45 +941,45 @@ function FlatpickrInstance(
   }
 
   function buildExtraButtons() {
-    if (self.extraButtonsContainer) {
-      clearNode(self.extraButtonsContainer);
+    if (self.footerButtons) {
+      clearNode(self.footerButtons);
     }
 
-    self.extraButtonsContainer = self.calendarContainer.querySelector(
-      ".flatpickr-extra-buttons-container"
+    if (!self.config.todayButton) {
+      return;
+    }
+
+    self.footerButtons = self.calendarContainer.querySelector(
+      ".flatpickr-footer-buttons"
     ) as HTMLDivElement;
 
-    if (!self.extraButtonsContainer) {
-      self.extraButtonsContainer = createElement<HTMLDivElement>(
+    if (!self.footerButtons) {
+      self.footerButtons = createElement<HTMLDivElement>(
         "div",
-        "flatpickr-extra-buttons-container"
+        "flatpickr-footer-buttons"
       );
 
-      self.todayButtonElement = createElement<HTMLButtonElement>(
+      self.calendarContainer.appendChild(self.footerButtons);
+    }
+
+    if (self.todayButton) {
+      clearNode(self.todayButton);
+    }
+
+    if (self.config.todayButton) {
+      self.todayButton = createElement<HTMLButtonElement>(
         "button",
         "flatpickr-today-button"
       );
 
-      self.todayButtonElement.addEventListener("click", () => {
+      self.todayButton.addEventListener("click", () => {
         self.setDate(new Date(), true);
       });
 
-      self.extraButtonsContainer.appendChild(self.todayButtonElement);
-      self.calendarContainer.appendChild(self.extraButtonsContainer);
-    }
+      self.todayButton.textContent = self.l10n.today;
+      self.todayButton.disabled = self.input.disabled;
 
-    if (self.todayButtonElement) {
-      self.todayButtonElement.textContent = self.l10n.today;
-      self.todayButtonElement.style.display = self.config.todayButton
-        ? "block"
-        : "none";
-      self.todayButtonElement.disabled = self.input.disabled;
-    }
-
-    if (self.extraButtonsContainer) {
-      self.extraButtonsContainer.style.display = self.config.todayButton
-        ? "flex"
-        : "none";
+      self.footerButtons.appendChild(self.todayButton);
     }
   }
 
@@ -2051,6 +2051,7 @@ function FlatpickrInstance(
       "static",
       "enableSeconds",
       "disableMobile",
+      "todayButton",
     ];
 
     const userConfig = {
