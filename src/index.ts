@@ -2181,9 +2181,10 @@ function FlatpickrInstance(
       !self.config.disable.length &&
       !self.config.enable &&
       !self.config.weekNumbers &&
-      /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
+      /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini|Opera Mobi|Mobile|Silk|Kindle|Windows Phone|PlayBook|BB10|MeeGo|Tizen|Puffin/i.test(
         navigator.userAgent
-      );
+      ) &&
+      window.innerWidth <= 768;
 
     for (let i = 0; i < self.config.plugins.length; i++) {
       const pluginConf = self.config.plugins[i](self) || ({} as Options);
