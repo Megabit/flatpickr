@@ -39,6 +39,27 @@ import { tokenRegex, monthToStr } from "./utils/formatting";
 import "./utils/polyfills";
 
 const DEBOUNCED_CHANGE_MS = 300;
+const MOBILE_BROWSER_REGEX =
+  /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini|Opera Mobi|Mobile|Silk|Kindle|Windows Phone|PlayBook|BB10|MeeGo|Tizen|Puffin/i;
+
+type MobileNavigator = Navigator & {
+  userAgentData?: {
+    mobile?: boolean;
+  };
+  msMaxTouchPoints?: number;
+};
+
+function isMobileBrowser() {
+  const nav = navigator as MobileNavigator;
+  const touchPoints = nav.maxTouchPoints || nav.msMaxTouchPoints || 0;
+  const isIpadOS = nav.platform === "MacIntel" && touchPoints > 1;
+
+  if (nav.userAgentData && nav.userAgentData.mobile === true) {
+    return true;
+  }
+
+  return MOBILE_BROWSER_REGEX.test(nav.userAgent) || isIpadOS;
+}
 
 function FlatpickrInstance(
   element: HTMLElement,
@@ -2187,10 +2208,7 @@ function FlatpickrInstance(
       !self.config.disable.length &&
       !self.config.enable &&
       !self.config.weekNumbers &&
-      /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini|Opera Mobi|Mobile|Silk|Kindle|Windows Phone|PlayBook|BB10|MeeGo|Tizen|Puffin/i.test(
-        navigator.userAgent
-      ) &&
-      window.innerWidth <= 768;
+      isMobileBrowser();
 
     for (let i = 0; i < self.config.plugins.length; i++) {
       const pluginConf = self.config.plugins[i](self) || ({} as Options);
