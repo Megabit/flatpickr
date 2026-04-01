@@ -997,7 +997,13 @@ function FlatpickrInstance(
       );
 
       self.todayButton.addEventListener("click", () => {
-        self.setDate(new Date(), true);
+        const today = new Date();
+
+        if (!self.config.enableTime) {
+          today.setHours(0, 0, 0, 0);
+        }
+
+        self.setDate(today, true);
         self.close();
       });
 

@@ -1470,6 +1470,53 @@ describe("flatpickr", () => {
       expect((fp.latestSelectedDateObj as Date).getMinutes()).toEqual(30);
     });
 
+    it("today button respects a date-only maxDate for today", () => {
+      const realNow = Date.now();
+
+      try {
+        jest.setSystemTime(new Date(2026, 3, 1, 14, 23, 0, 0));
+
+        createInstance({
+          todayButton: true,
+          maxDate: "2026-04-01",
+        });
+
+        fp.open();
+        clickOn(fp.todayButton as HTMLButtonElement);
+
+        expect(fp.selectedDates).toHaveLength(1);
+        expect(fp.input.value).toEqual("2026-04-01");
+        expect(fp.selectedDates[0].getHours()).toEqual(0);
+        expect(fp.selectedDates[0].getMinutes()).toEqual(0);
+      } finally {
+        jest.setSystemTime(realNow);
+      }
+    });
+
+    it("today button preserves the current time when time is enabled", () => {
+      const realNow = Date.now();
+
+      try {
+        jest.setSystemTime(new Date(2026, 3, 1, 14, 23, 0, 0));
+
+        createInstance({
+          todayButton: true,
+          enableTime: true,
+          dateFormat: "Y-m-d H:i",
+        });
+
+        fp.open();
+        clickOn(fp.todayButton as HTMLButtonElement);
+
+        expect(fp.selectedDates).toHaveLength(1);
+        expect(fp.input.value).toEqual("2026-04-01 14:23");
+        expect(fp.selectedDates[0].getHours()).toEqual(14);
+        expect(fp.selectedDates[0].getMinutes()).toEqual(23);
+      } finally {
+        jest.setSystemTime(realNow);
+      }
+    });
+
     it("time picker: minDate + bounds", () => {
       createInstance({
         noCalendar: true,
