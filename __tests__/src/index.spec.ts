@@ -15,10 +15,30 @@ jest.useFakeTimers();
 
 let elem: undefined | HTMLInputElement, fp: Instance;
 const UA = navigator.userAgent;
+const PLATFORM = navigator.platform;
+const MAX_TOUCH_POINTS = navigator.maxTouchPoints;
+const USER_AGENT_DATA = (navigator as any).userAgentData;
 let mockAgent: string | undefined;
+let mockPlatform: string | undefined;
+let mockMaxTouchPoints: number | undefined;
+let mockUserAgentData: { mobile?: boolean } | undefined;
 
 (navigator as any).__defineGetter__("userAgent", function () {
   return mockAgent || UA;
+});
+
+(navigator as any).__defineGetter__("platform", function () {
+  return mockPlatform || PLATFORM;
+});
+
+(navigator as any).__defineGetter__("maxTouchPoints", function () {
+  return mockMaxTouchPoints !== undefined
+    ? mockMaxTouchPoints
+    : MAX_TOUCH_POINTS;
+});
+
+(navigator as any).__defineGetter__("userAgentData", function () {
+  return mockUserAgentData !== undefined ? mockUserAgentData : USER_AGENT_DATA;
 });
 
 function createInstance(config?: Options, el?: HTMLElement) {
@@ -39,6 +59,9 @@ function destroyInstance() {
 
 function beforeEachTest() {
   mockAgent = undefined;
+  mockPlatform = undefined;
+  mockMaxTouchPoints = undefined;
+  mockUserAgentData = undefined;
   jest.runAllTimers();
 
   if (document.activeElement) {
@@ -1110,6 +1133,53 @@ describe("flatpickr", () => {
           createInstance();
 
           expect(fp.isMobile).toBe(true);
+        });
+
+        it("returns true for mobile user agents on wide viewports", () => {
+          const innerWidth = window.innerWidth;
+
+          try {
+            Object.defineProperty(window, "innerWidth", {
+              configurable: true,
+              value: 1024,
+            });
+
+            mockAgent = "Android, Mobile";
+            createInstance();
+
+            expect(fp.isMobile).toBe(true);
+          } finally {
+            Object.defineProperty(window, "innerWidth", {
+              configurable: true,
+              value: innerWidth,
+            });
+          }
+        });
+
+        it("returns true when userAgentData reports mobile", () => {
+          mockAgent = "Mozilla/5.0";
+          mockUserAgentData = { mobile: true };
+          createInstance();
+
+          expect(fp.isMobile).toBe(true);
+        });
+
+        it("returns true for iPadOS desktop-class user agents", () => {
+          mockAgent = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15)";
+          mockPlatform = "MacIntel";
+          mockMaxTouchPoints = 5;
+          createInstance();
+
+          expect(fp.isMobile).toBe(true);
+        });
+
+        it("returns false for desktop Macs without touch points", () => {
+          mockAgent = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15)";
+          mockPlatform = "MacIntel";
+          mockMaxTouchPoints = 0;
+          createInstance();
+
+          expect(fp.isMobile).toBe(false);
         });
       });
 
