@@ -187,6 +187,138 @@ describe("flatpickr", () => {
     });
   });
 
+  describe("calendar width", () => {
+    let animationFrames: FrameRequestCallback[];
+    let hiddenContainer: HTMLDivElement;
+
+    beforeEach(() => {
+      animationFrames = [];
+      hiddenContainer = document.createElement("div");
+      document.body.appendChild(hiddenContainer);
+
+      jest
+        .spyOn(window, "requestAnimationFrame")
+        .mockImplementation((callback: FrameRequestCallback) => {
+          animationFrames.push(callback);
+          return animationFrames.length;
+        });
+    });
+
+    afterEach(() => {
+      jest.restoreAllMocks();
+      hiddenContainer.remove();
+    });
+
+    function flushAnimationFrames() {
+      const callbacks = animationFrames.splice(0);
+      callbacks.forEach((callback) => callback(0));
+    }
+
+    function mockCalendarWidths(daysWidth: () => number, weekWidth = 0) {
+      Object.defineProperty(fp.days, "offsetWidth", {
+        configurable: true,
+        get: daysWidth,
+      });
+      if (fp.weekWrapper !== undefined) {
+        Object.defineProperty(fp.weekWrapper, "offsetWidth", {
+          configurable: true,
+          value: weekWidth,
+        });
+      }
+    }
+
+    it("does not overwrite widths when initialized in a hidden container", () => {
+      hiddenContainer.style.display = "none";
+      const input = document.createElement("input");
+      hiddenContainer.appendChild(input);
+
+      createInstance(
+        {
+          static: true,
+          weekNumbers: true,
+          showMonths: 1,
+          altInput: true,
+        },
+        input
+      );
+      mockCalendarWidths(() => 0);
+      fp.daysContainer!.style.width = "320px";
+      fp.calendarContainer.style.width = "356px";
+      fp.calendarContainer.style.setProperty("display", "inline-block");
+      fp.calendarContainer.style.setProperty(
+        "visibility",
+        "visible",
+        "important"
+      );
+
+      flushAnimationFrames();
+
+      expect(fp.daysContainer!.style.width).toBe("320px");
+      expect(fp.calendarContainer.style.width).toBe("356px");
+      expect(fp.daysContainer!.style.width).not.toBe("1px");
+      expect(fp.calendarContainer.style.width).not.toBe("1px");
+      expect(fp.calendarContainer.style.display).toBe("inline-block");
+      expect(fp.calendarContainer.style.visibility).toBe("visible");
+      expect(fp.calendarContainer.style.getPropertyPriority("visibility")).toBe(
+        "important"
+      );
+    });
+
+    it("recalculates hidden-initialization widths when opened", () => {
+      hiddenContainer.style.display = "none";
+      const input = document.createElement("input");
+      hiddenContainer.appendChild(input);
+      let daysWidth = 0;
+
+      createInstance(
+        {
+          static: true,
+          weekNumbers: true,
+          showMonths: 1,
+          altInput: true,
+        },
+        input
+      );
+      mockCalendarWidths(() => daysWidth, 36);
+      flushAnimationFrames();
+
+      expect(fp.daysContainer!.style.width).toBe("");
+      expect(fp.calendarContainer.style.width).toBe("");
+
+      hiddenContainer.style.display = "block";
+      daysWidth = 307;
+      fp.open();
+      flushAnimationFrames();
+
+      expect(fp.daysContainer!.style.width).toBe("308px");
+      expect(fp.calendarContainer.style.width).toBe("344px");
+    });
+
+    it("multiplies a valid day width by showMonths", () => {
+      const input = document.createElement("input");
+      hiddenContainer.appendChild(input);
+
+      createInstance({ showMonths: 2 }, input);
+      mockCalendarWidths(() => 307);
+      flushAnimationFrames();
+
+      expect(fp.daysContainer!.style.width).toBe("616px");
+      expect(fp.calendarContainer.style.width).toBe("616px");
+    });
+
+    it("preserves visible initialization width calculation", () => {
+      const input = document.createElement("input");
+      hiddenContainer.appendChild(input);
+
+      createInstance({ weekNumbers: true }, input);
+      mockCalendarWidths(() => 307, 36);
+      flushAnimationFrames();
+
+      expect(fp.daysContainer!.style.width).toBe("308px");
+      expect(fp.calendarContainer.style.width).toBe("344px");
+    });
+  });
+
   describe("datetimestring parser", () => {
     describe("date string parser", () => {
       it("should parse timestamp", () => {

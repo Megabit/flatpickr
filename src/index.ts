@@ -170,24 +170,54 @@ function FlatpickrInstance(
       return;
     } else if (config.noCalendar !== true) {
       window.requestAnimationFrame(function () {
-        if (self.calendarContainer !== undefined) {
-          self.calendarContainer.style.visibility = "hidden";
-          self.calendarContainer.style.display = "block";
-        }
-        if (self.daysContainer !== undefined) {
-          const daysWidth = (self.days.offsetWidth + 1) * config.showMonths;
+        if (
+          self.calendarContainer === undefined ||
+          self.daysContainer === undefined ||
+          self.days === undefined
+        )
+          return;
+
+        const calendar = self.calendarContainer;
+        const display = calendar.style.getPropertyValue("display");
+        const displayPriority = calendar.style.getPropertyPriority("display");
+        const visibility = calendar.style.getPropertyValue("visibility");
+        const visibilityPriority = calendar.style.getPropertyPriority(
+          "visibility"
+        );
+
+        try {
+          calendar.style.setProperty("visibility", "hidden");
+          calendar.style.setProperty("display", "block");
+
+          const singleMonthWidth = self.days.offsetWidth;
+          const daysWidth = (singleMonthWidth + 1) * config.showMonths;
+          const weekWidth =
+            self.weekWrapper !== undefined ? self.weekWrapper.offsetWidth : 0;
+
+          if (
+            singleMonthWidth <= 0 ||
+            !isFinite(singleMonthWidth) ||
+            daysWidth <= 0 ||
+            !isFinite(daysWidth) ||
+            weekWidth < 0 ||
+            !isFinite(weekWidth)
+          )
+            return;
 
           self.daysContainer.style.width = daysWidth + "px";
+          calendar.style.width = daysWidth + weekWidth + "px";
+        } finally {
+          if (visibility !== "")
+            calendar.style.setProperty(
+              "visibility",
+              visibility,
+              visibilityPriority
+            );
+          else calendar.style.removeProperty("visibility");
 
-          self.calendarContainer.style.width =
-            daysWidth +
-            (self.weekWrapper !== undefined
-              ? self.weekWrapper.offsetWidth
-              : 0) +
-            "px";
-
-          self.calendarContainer.style.removeProperty("visibility");
-          self.calendarContainer.style.removeProperty("display");
+          if (display !== "")
+            calendar.style.setProperty("display", display, displayPriority);
+          else calendar.style.removeProperty("display");
         }
       });
     }
@@ -2031,6 +2061,7 @@ function FlatpickrInstance(
 
     if (!wasOpen) {
       self.calendarContainer.classList.add("open");
+      setCalendarWidth();
       self._input.classList.add("active");
       triggerEvent("onOpen");
       positionCalendar(positionElement);
